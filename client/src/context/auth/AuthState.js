@@ -33,7 +33,7 @@ const AuthState = (props) => {
     }
 
     try {
-      const res = await axios.get("/api/user");
+      const res = await axios.get("http://localhost:5000/api/user");
 
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
@@ -50,7 +50,11 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post("/api/user/register", formData, config);
+      const res = await axios.post(
+        "http://localhost:5000/api/user/register",
+        formData,
+        config
+      );
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
       loadUser();
     } catch (err) {
@@ -67,9 +71,13 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post("/api/user/login", formData, config);
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      const res = await axios.post(
+        "http://localhost:5000/api/user/login",
+        formData,
+        config
+      );
       loadUser();
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
     } catch (err) {
       dispatch({ type: LOGIN_FAIL, payload: err.response.data.msg });
     }
